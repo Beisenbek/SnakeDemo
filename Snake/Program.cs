@@ -12,7 +12,11 @@ namespace Snake
         static void Main(string[] args)
         {
             MySnake worm = new MySnake();
+            Food food = new Food();
 
+            Console.SetWindowSize(41, 41);
+
+ 
             ConsoleKeyInfo keyInfo;
 
             while (true)
@@ -22,16 +26,28 @@ namespace Snake
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        Console.WriteLine("Up");
+                        if (worm.Move(0, -1, food.location))
+                        {
+                            food = new Food();
+                        }
                         break;
                     case ConsoleKey.DownArrow:
-                        Console.WriteLine("Down");
+                        if(worm.Move(0, 1, food.location))
+                        {
+                            food = new Food();
+                        }
                         break;
                     case ConsoleKey.LeftArrow:
-                        Console.WriteLine("Left");
+                        if(worm.Move(-1, 0, food.location))
+                        {
+                            food = new Food();
+                        }
                         break;
                     case ConsoleKey.RightArrow:
-                        Console.WriteLine("Right");
+                        if(worm.Move(1, 0, food.location))
+                        {
+                            food = new Food();
+                        }
                         break;
                     case ConsoleKey.Escape:
                         return;
