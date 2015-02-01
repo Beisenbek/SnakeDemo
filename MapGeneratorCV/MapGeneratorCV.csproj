@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D40F33D0-18F2-4198-AE41-D1625915CE2A}</ProjectGuid>
+    <ProjectGuid>{6CF866EF-6704-4BB5-A428-A92BD7D06DC4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Snake</RootNamespace>
-    <AssemblyName>Snake</AssemblyName>
+    <RootNamespace>MapGeneratorCV</RootNamespace>
+    <AssemblyName>MapGeneratorCV</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,23 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Items\Food.cs" />
-    <Compile Include="Items\Point.cs" />
-    <Compile Include="Items\Snake.cs" />
-    <Compile Include="Items\Wall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps\Map1.xml">
+    <Content Include="Map1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PossibleVariants.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snake\Snake.csproj">
+      <Project>{d40f33d0-18f2-4198-ae41-d1625915ce2a}</Project>
+      <Name>Snake</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

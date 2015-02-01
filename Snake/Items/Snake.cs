@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Snake.Items
 {
+    public enum MoveResult
+    {
+        OK,
+        FOOD,
+        CRASH
+    }
+
     public class MySnake
     {
         char sign = '*';
@@ -26,16 +33,30 @@ namespace Snake.Items
             }
         }
 
-        public bool Move(int dx, int dy, Point foodLocation)
+
+       
+
+        public MoveResult Move(int dx, int dy, Point foodLocation, List<Point> wallPoints)
         {
+            //0 - ok, 1 - food, 2 - crash
             Clear();
 
             if (foodLocation.X == body[0].X + dx && foodLocation.Y == body[0].Y + dy)
             {
                 body.Insert(0, foodLocation);
                 Show();
-                return true;
+                return MoveResult.FOOD;
             }
+
+            foreach (Point p in wallPoints)
+            {
+                if (p.X == body[0].X + dx && p.Y == body[0].Y + dy)
+                {
+                    Show();
+                    return MoveResult.CRASH;
+                }
+            }
+
 
 
             for (int i = body.Count-1; i > 0; i--)
@@ -49,9 +70,9 @@ namespace Snake.Items
             body[0].Y = body[0].Y + dy;
             Show();
 
-            return false;
-
+            return MoveResult.OK;
         }
+
         public void Clear()
         {
             foreach (Point p in body)

@@ -13,6 +13,7 @@ namespace Snake
         {
             MySnake worm = new MySnake();
             Food food = new Food();
+            Wall wall = new Wall();
 
             Console.SetWindowSize(41, 41);
 
@@ -22,32 +23,25 @@ namespace Snake
             while (true)
             {
                 keyInfo = Console.ReadKey();
-
+                int dx = 0;
+                int dy = 0;
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (worm.Move(0, -1, food.location))
-                        {
-                            food = new Food();
-                        }
+                        dx = 0;
+                        dy = -1;
                         break;
                     case ConsoleKey.DownArrow:
-                        if(worm.Move(0, 1, food.location))
-                        {
-                            food = new Food();
-                        }
+                        dx = 0;
+                        dy = 1;
                         break;
                     case ConsoleKey.LeftArrow:
-                        if(worm.Move(-1, 0, food.location))
-                        {
-                            food = new Food();
-                        }
+                        dx = -1;
+                        dy = 0;
                         break;
                     case ConsoleKey.RightArrow:
-                        if(worm.Move(1, 0, food.location))
-                        {
-                            food = new Food();
-                        }
+                        dx = 1;
+                        dy = 0;
                         break;
                     case ConsoleKey.Escape:
                         return;
@@ -55,7 +49,23 @@ namespace Snake
                     default: break;
                 }
 
-               
+                MoveResult result = worm.Move(dx, dy, food.location, wall.body);
+
+                switch (result)
+                {
+                    case MoveResult.OK:
+                        break;
+                    case MoveResult.FOOD:
+                        food = new Food();
+                        break;
+                    case MoveResult.CRASH:
+                        Console.SetCursorPosition(20, 20);
+                        Console.WriteLine("Game Over!");
+                        break;
+                    default: break;
+                }
+              
+                
 
             }
 
